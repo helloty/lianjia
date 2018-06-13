@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content=""/>
+
+    <script src="js/modernizr.custom.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery.fancybox.css" rel="stylesheet">
+    <link href="css/flickity.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+
+    <link href="css/styles.css" rel="stylesheet">
+    <link href="css/queries.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<header id="main">
+    <section class="hero">
+        <div class="container">
+            <div class="row nav-wrapper">
+                <div class="col-md-12 col-sm-12 col-xs-12 text-left" style="font-size: 16px">
+                    <!--土地流转查询工具-->
+                    <div class="menu-wrap" style="display: flex;justify-content: space-between">
+                        <div style="font-size: 24px">
+                            链家销售管理系统
+                        </div>
+                        <div style="display: flex;justify-content: flex-start">
+                            <div class="menu">
+                                <a href="#about" class="active">查询</a>
+                            </div>
+                            <div class="menu">
+                                <a href="javascript:void(0)" onclick="addRecord()">录入</a>
+                            </div>
+                            <div class="menu">
+                                <a href="javascript:void(0)" onclick="about()">关于</a>
+                            </div>
+                            <div class="menu">
+                                <a href="https://github.com/nebulasio" target="_blank">github</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row hero-content">
+                <div class="col-md-12 text-center" style="padding-top: 0px">
+                    <!--<h1 class="animated fadeInDown">基于星云链的土地流转查询系统</h1>-->
+                    <!--<a href="#features" class="read-btn animated fadeInUp">查询</a>-->
+
+                    <h1 id="noExtension" style="display: none">请安装
+                        <a target="_blank"
+                           href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a> 再使用</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>
+<section class="services-list page-section" id="features">
+    <div class="container">
+        <div class="row">
+            <!--<div class="title-section text-center">
+                <h2>系统简介</h2>
+            </div>-->
+            <div class="disc-section text-center">
+                <p>基于新一代区块链公链星云链，简单高效的业绩录入查询系统</p>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-4 feature-2 wp2 delay-05s">
+                    <div class="feature-icon">
+                        <img class="gn-icon" src="img/1gn.png">
+                    </div>
+                    <div class="feature-content">
+                        <h1>简单快速</h1>
+                        <p>无需注册，基于钱包</p>
+                    </div>
+                </div>
+                <div class="col-md-4 feature-3 wp2 delay-1s">
+                    <div class="feature-icon">
+                        <img class="gn-icon" src="img/2gn.png">
+                    </div>
+                    <div class="feature-content">
+                        <h1>数据安全</h1>
+                        <p>基于星云链加密</p>
+                    </div>
+                </div>
+                <div class="col-md-4 feature-1 wp2">
+                    <div class="feature-icon">
+                        <img class="gn-icon" src="img/3gn.png">
+                    </div>
+                    <div class="feature-content">
+                        <h1>不可篡改</h1>
+                        <p>一旦记录，永久不可篡改</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="about" class="aboutUs page-section">
+    <div class="aboutUs-wrap">
+        <div class="title-section text-center wp2">
+            <h2 style="color: #609bf9">销售记录查询</h2>
+            <br>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-2"></div>
+                <div class="col-xs-8">
+                    <input type="text" name="name" id="search_value" required="required" class="form wp2"
+                           placeholder="请填写土地编号(例如:abcdef123456)">
+                </div>
+                <div class="relative fullwidth col-xs-12">
+                    <!-- Send Button -->
+                    <button id="search" name="submit" class="form-btn semibold wp2">查询</button>
+                </div>
+            </div>
+            <div class="row" id="app">
+                <table id="tableList" class="table table-bordered" style="display:none;margin-top: 30px">
+                    <thead>
+                    <tr>
+                        <th>交易时间</th>
+                        <th>拥有者编号</th>
+                        <th>拥有者</th>
+                        <th>转给谁</th>
+                        <th>地址</th>
+                        <th>备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="l in list">
+                        <td v-html="l.date"></td>
+                        <td v-html="l.orderNo"></td>
+                        <td v-html="l.username"></td>
+                        <td v-html="l.toname"></td>
+                        <td v-html="l.addr"></td>
+                        <td v-html="l.remark"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="contact" class="container page-section" style="display: none;">
+    <!-- Contact Inner -->
+    <div class="inner contact">
+        <!-- Form Area -->
+        <div class="contact-form">
+            <br>
+            <div class="col-xs-12 visible">
+                <input type="text" id="projectId" class="form" placeholder="土地编号" autocomplete="off">
+            </div>
+            <div class="col-xs-12 visible">
+                <input type="text" id="username" class="form" placeholder="拥有者" autocomplete="off">
+            </div>
+            <div class="col-xs-12 visible">
+                <input type="text" id="toname" class="form" placeholder="转给谁" autocomplete="off">
+            </div>
+            <div class="col-xs-12 visible">
+                <input type="text" id="addr" class="form" placeholder="所在区域" autocomplete="off">
+            </div>
+            <div class="col-xs-12 visible">
+                <input type="text" id="remark" class="form" placeholder="备注" autocomplete="off">
+            </div>
+            <div class="relative fullwidth col-xs-12">
+                <!-- Send Button -->
+                <button id="push" onclick="push()" name="submit" class="form-btn semibold">提交</button>
+            </div>
+            <!-- End Bottom Submit -->
+            <!-- Clear -->
+            <div class="clear"></div>
+        </div>
+        <!-- End Contact Form Area -->
+    </div>
+    <!-- End Inner -->
+</section>
+
+<footer id="footer" class="footer">
+    <section id="site-socials" class="no-padding white-bg">
+        <div class="site-socials inner no-padding">
+
+            <!-- Adress, Mail -->
+            <div class="address socials visible" data-animation="fadeInRight"
+                 data-animation-delay="500">
+                <!-- Phone Number, Mail -->
+                <p>Copyright &copy; 2018.基于新一代区块链公链
+                    <a href="https://nebulas.io/" target="_blank">NAS</a>
+                </p>
+            </div>
+            <!-- End Adress, Mail -->
+        </div>
+        <!-- End Inner -->
+    </section>
+</footer>
+<script src=js/nebPay.js></script>
+<script src="js/toucheffects.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/flickity.pkgd.min.js"></script>
+<script src="js/jquery.fancybox.pack.js"></script>
+<script src="js/waypoints.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="js/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var NebPay = require("nebpay");
+    var nebPay = new NebPay();
+
+    var dappAddress = "n1i7uy9WhHgNUvaTdMozhDpU5JZJQ1Biosp";
+    //检查扩展是否已安装
+    //如果安装了扩展，var“webExtensionWallet”将被注入到web页面中1
+    setTimeout(function () {
+        if (typeof (webExtensionWallet) === "undefined") {
+            //alert ("扩展钱包未安装，请先安装.")
+            $("#noExtension").show();
+        }
+    }, 500);
+
+
+    $("#search").click(function () {
+        var search_value = $("#search_value").val();
+        if (search_value == '') {
+            search_value = 'abcdef123456'
+        }
+        var to = dappAddress;
+        var value = "0";
+        var callFunction = "get";
+        var callArgs = [];
+        callArgs.push(search_value);
+        nebPay.simulateCall(to, value, callFunction, JSON.stringify(callArgs), {
+            listener: cbSearch
+        });
+    })
+
+    function cbSearch(resp) {
+        var result = resp.result
+        if (result === 'null') {
+            layer.msg('没有查到土地信息');
+        } else {
+            $('#tableList').show();
+            var resultObj = JSON.parse(result);
+            var len = resultObj.username.split('|-').length;
+            var obj = [];
+            for (var i = 0; i < len; i++) {
+                var temp = {
+                    username: resultObj.username.split('|-')[i],
+                    toname: resultObj.toname.split('|-')[i],
+                    orderNo: resultObj.author.split('|-')[i],
+                    date: resultObj.date.split('|-')[i],
+                    addr: resultObj.addr.split('|-')[i],
+                    remark: resultObj.remark.split('|-')[i],
+                }
+                obj.push(temp);
+            }
+            Vue.set(app, 'list', obj)
+        }
+
+    }
+
+    function push() {
+        console.log(1);
+        var projectId = $('#projectId').val();
+        var username = $('#username').val();
+        var toname = $('#toname').val();
+        var addr = $('#addr').val();
+        var remark = $('#remark').val();
+        if (projectId == '') {
+            layer.msg('土地编号不能为空');
+            return;
+        } else if (username == '') {
+            layer.msg('拥有者不能为空');
+            return;
+        } else if (toname == '') {
+            layer.msg('转给谁不能为空');
+            return;
+        } else if (addr == '') {
+            layer.msg('地址不能为空');
+            return;
+        }
+        var to = dappAddress;
+        var value = "0";
+        var callFunction = "save"
+        var callArgs = [];
+        callArgs.push(projectId);
+        callArgs.push(username);
+        callArgs.push(toname);
+        callArgs.push(addr);
+        callArgs.push(new Date().format("yyyy-MM-dd hh:mm:ss"));
+        callArgs.push(remark);
+        nebPay.call(to, value, callFunction, JSON.stringify(callArgs), {
+            listener: cbPush
+        });
+    }
+
+    function cbPush(resp) {
+        console.log("response of push: " + resp)
+        //layer.closeAll();
+    }
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            list: []
+        }
+    });
+
+
+    Date.prototype.format = function (format) {
+        var args = {
+            "M+": this.getMonth() + 1,
+            "d+": this.getDate(),
+            "h+": this.getHours(),
+            "m+": this.getMinutes(),
+            "s+": this.getSeconds(),
+            "q+": Math.floor((this.getMonth() + 3) / 3),  //quarter
+            "S": this.getMilliseconds()
+        };
+        if (/(y+)/.test(format))
+            format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var i in args) {
+            var n = args[i];
+            if (new RegExp("(" + i + ")").test(format))
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? n : ("00" + n).substr(("" + n).length));
+        }
+        return format;
+    };
+
+    function about() {
+        layer.alert('这是基于星云链的房屋销售查询系统。便于销售人员的业绩统计查询管理<br>当前版本：1.0.0<br/>作者：菜菜', {
+            skin: 'layer-ext-moon',
+            title: '关于我们'
+        })
+    }
+
+    var content_html = $('#contact').html();
+    $('#contact').remove();
+
+    function addRecord() {
+        layer.open({
+            type: 1,
+            area: ['520px', '540px'], //宽高
+            content: content_html
+        });
+    }
+</script>
+</body>
+
+</html>
