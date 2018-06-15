@@ -441,7 +441,7 @@ Hero
 .hero {
     position: relative;
     padding: 60px 0 60px 0;
-    min-height: 400px;
+    min-height: 500px;
     background: rgb(40, 70, 102) url('../img/hero.jpg') no-repeat center center;
     background-size: cover;
     color: #fff; 
@@ -1276,4 +1276,11 @@ Waypoints
     width:80px;
     cursor: pointer;
     text-align: center;
+}
+#features{
+    padding-bottom: 60px;
+}
+
+#search{
+    border-radius: 30px;
 }
