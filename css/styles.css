@@ -1284,3 +1284,8 @@ Waypoints
 #search{
     border-radius: 30px;
 }
+
+.contact-form .visible{
+    line-height: 45px;
+    text-align: right;
+}

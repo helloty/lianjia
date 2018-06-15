@@ -129,7 +129,7 @@
                 <div class="col-xs-2"></div>
                 <div class="col-xs-8">
                     <input type="text" name="name" id="search_value" required="required" class="form wp2"
-                           placeholder="请填写土地编号(例如:abcdef123456)">
+                           placeholder="请填写人员编号(例如:RY000001)">
                 </div>
                 <div class="relative fullwidth col-xs-12">
                     <!-- Send Button -->
@@ -140,21 +140,19 @@
                 <table id="tableList" class="table table-bordered" style="display:none;margin-top: 30px">
                     <thead>
                     <tr style="background: #f5f5f5">
+                        <th>人员编号</th>
+                        <th>所在区域</th>
+                        <th>销售房型</th>
                         <th>交易时间</th>
-                        <th>拥有者编号</th>
-                        <th>拥有者</th>
-                        <th>转给谁</th>
-                        <th>地址</th>
                         <th>备注</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="l in list">
-                        <td v-html="l.date"></td>
-                        <td v-html="l.orderNo"></td>
+                        <td v-html="l.key"></td>
+                        <td v-html="l.addr"></td>
                         <td v-html="l.username"></td>
                         <td v-html="l.toname"></td>
-                        <td v-html="l.addr"></td>
                         <td v-html="l.remark"></td>
                     </tr>
                     </tbody>
@@ -172,19 +170,35 @@
         <div class="contact-form">
             <br>
             <div class="col-xs-12 visible">
-                <input type="text" id="projectId" class="form" placeholder="土地编号" autocomplete="off">
+                <span class="col-xs-3">人员编号 </span>
+                <span class="col-xs-9">
+                     <input type="text" id="projectId" class="form" placeholder="请填写人员编号" autocomplete="off">
+                </span>
             </div>
             <div class="col-xs-12 visible">
-                <input type="text" id="username" class="form" placeholder="拥有者" autocomplete="off">
+                <span class="col-xs-3">所在区域 </span>
+                <span class="col-xs-9">
+                     <input type="text" id="addr" class="form" placeholder="请填写所在区域" autocomplete="off">
+                </span>
             </div>
             <div class="col-xs-12 visible">
-                <input type="text" id="toname" class="form" placeholder="转给谁" autocomplete="off">
+                <span class="col-xs-3">销售房型 </span>
+                <span class="col-xs-9">
+                  <input type="text" id="username" class="form" placeholder="销售房型" autocomplete="off">
+                </span>
             </div>
             <div class="col-xs-12 visible">
-                <input type="text" id="addr" class="form" placeholder="所在区域" autocomplete="off">
+                <span class="col-xs-3">日期 </span>
+                <span class="col-xs-9">
+                    <input type="date" id="toname" class="form" placeholder="日期" autocomplete="off" style="height: 44px;">
+                </span>
             </div>
             <div class="col-xs-12 visible">
-                <input type="text" id="remark" class="form" placeholder="备注" autocomplete="off">
+                <span class="col-xs-3">备注 </span>
+                <span class="col-xs-9">
+                    <input type="text" id="remark" class="form" placeholder="备注" autocomplete="off">
+                </span>
+
             </div>
             <div class="relative fullwidth col-xs-12">
                 <!-- Send Button -->
@@ -244,7 +258,7 @@
     $("#search").click(function () {
         var search_value = $("#search_value").val();
         if (search_value == '') {
-            search_value = 'abcdef123456'
+            search_value = 'RY000001'
         }
         var to = dappAddress;
         var value = "0";
@@ -259,7 +273,7 @@
     function cbSearch(resp) {
         var result = resp.result
         if (result === 'null') {
-            layer.msg('没有查到土地信息');
+            layer.msg('没有查到信息');
         } else {
             $('#tableList').show();
             var resultObj = JSON.parse(result);
@@ -272,6 +286,7 @@
                     orderNo: resultObj.author.split('|-')[i],
                     date: resultObj.date.split('|-')[i],
                     addr: resultObj.addr.split('|-')[i],
+                    key:resultObj.key.split('|-')[i],
                     remark: resultObj.remark.split('|-')[i],
                 }
                 obj.push(temp);
@@ -289,16 +304,16 @@
         var addr = $('#addr').val();
         var remark = $('#remark').val();
         if (projectId == '') {
-            layer.msg('土地编号不能为空');
-            return;
-        } else if (username == '') {
-            layer.msg('拥有者不能为空');
-            return;
-        } else if (toname == '') {
-            layer.msg('转给谁不能为空');
+            layer.msg('人员编号不能为空');
             return;
         } else if (addr == '') {
-            layer.msg('地址不能为空');
+            layer.msg('所在区域不能为空');
+            return;
+        } else if (username == '') {
+            layer.msg('销售房型不能为空');
+            return;
+        } else if (toname == '') {
+            layer.msg('日期不能为空');
             return;
         }
         var to = dappAddress;
@@ -317,8 +332,9 @@
     }
 
     function cbPush(resp) {
-        console.log("response of push: " + resp)
-        //layer.closeAll();
+        console.log("response of push: " + resp);
+        layer.closeAll();
+        layer.msg('交易处理中...');
     }
 
     var app = new Vue({
@@ -362,7 +378,7 @@
     function addRecord() {
         layer.open({
             type: 1,
-            area: ['520px', '540px'], //宽高
+            area: ['520px', '520px'], //宽高
             content: content_html
         });
     }
